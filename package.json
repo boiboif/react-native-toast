@@ -40,6 +40,12 @@
     "docs:preview": "vitepress preview docs --host 0.0.0.0",
     "prepare": "bob build",
     "release": "npm publish --access public --registry=https://registry.npmjs.org/",
+    "release:check": "yarn lint && yarn typecheck && yarn prepare && yarn docs:build",
+    "release:dry-run": "npm pack --dry-run",
+    "release:push": "git push origin main --follow-tags",
+    "release:patch": "yarn release:check && npm version patch -m \"chore: release v%s\" && yarn release && yarn release:push",
+    "release:minor": "yarn release:check && npm version minor -m \"chore: release v%s\" && yarn release && yarn release:push",
+    "release:major": "yarn release:check && npm version major -m \"chore: release v%s\" && yarn release && yarn release:push",
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\""
   },
