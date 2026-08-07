@@ -39,6 +39,7 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs --host 0.0.0.0",
     "prepare": "bob build",
+    "release": "npm publish --access public --registry=https://registry.npmjs.org/",
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\""
   },
