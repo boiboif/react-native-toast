@@ -6,7 +6,7 @@
   "types": "./lib/typescript/src/index.d.ts",
   "exports": {
     ".": {
-      "boiboif-react-native-toast-source": "./src/index.tsx",
+      "boiboif-react-native-toast-source": "./src/index.ts",
       "types": "./lib/typescript/src/index.d.ts",
       "default": "./lib/module/index.js"
     },
@@ -19,6 +19,7 @@
     "ios",
     "cpp",
     "*.podspec",
+    "README.zh-CN.md",
     "react-native.config.js",
     "!ios/build",
     "!android/build",
@@ -34,12 +35,18 @@
   "scripts": {
     "example": "yarn workspace @boiboif/react-native-toast-example",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
+    "docs:dev": "vitepress dev docs --host 0.0.0.0",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs --host 0.0.0.0",
     "prepare": "bob build",
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\""
   },
   "keywords": [
     "react-native",
+    "toast",
+    "turbo-module",
+    "new-architecture",
     "ios",
     "android"
   ],
@@ -52,8 +59,10 @@
   "bugs": {
     "url": "https://github.com/boiboif/react-native-toast/issues"
   },
-  "homepage": "https://github.com/boiboif/react-native-toast#readme",
+  "homepage": "https://boiboif.github.io/react-native-toast/",
+  "sideEffects": false,
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
@@ -73,11 +82,12 @@
     "react-native": "0.85.0",
     "react-native-builder-bob": "^0.41.0",
     "turbo": "^2.9.16",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitepress": "^1.6.4"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
+    "react": ">=18.2.0",
+    "react-native": ">=0.76.0"
   },
   "workspaces": [
     "example"
@@ -104,7 +114,7 @@
   "codegenConfig": {
     "name": "ReactNativeToastSpec",
     "type": "modules",
-    "jsSrcsDir": "src",
+    "jsSrcsDir": "src/specs",
     "android": {
       "javaPackageName": "com.boiboif.reactnativetoast"
     }

@@ -7,8 +7,7 @@
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "customConditions": [
-      "boiboif-react-native-toast-source",
-      "react-native-strict-api"
+      "boiboif-react-native-toast-source"
     ],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

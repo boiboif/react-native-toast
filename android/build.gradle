@@ -31,6 +31,10 @@ apply plugin: "kotlin-android"
 
 apply plugin: "com.facebook.react"
 
+repositories {
+  maven { url "https://jitpack.io" }
+}
+
 android {
   namespace "com.boiboif.reactnativetoast"
 
@@ -48,4 +52,5 @@ android {
 
 dependencies {
   implementation "com.facebook.react:react-android"
+  implementation "com.github.getActivity:Toaster:13.8"
 }

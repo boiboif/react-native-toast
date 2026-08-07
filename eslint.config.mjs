@@ -24,6 +24,12 @@ export default defineConfig([
     },
   },
   {
-    ignores: ['node_modules/', 'lib/'],
+    ignores: [
+      'node_modules/',
+      'lib/',
+      'docs/.vitepress/.temp/',
+      'docs/.vitepress/cache/',
+      'docs/.vitepress/dist/',
+    ],
   },
 ]);
