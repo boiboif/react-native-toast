@@ -69,6 +69,15 @@ To check for linting errors, run the following:
 yarn lint
 ```
 
+Run the API behavior regression tests with Node.js's built-in test runner:
+
+```sh
+yarn test
+```
+
+These tests mock the native module. Native changes also require building and
+running the example app on the affected platform.
+
 To fix formatting errors, run the following:
 
 ```sh
@@ -83,8 +92,9 @@ The `package.json` file contains various scripts for common tasks:
 
 - `yarn`: setup project by installing dependencies.
 - `yarn typecheck`: type-check files with TypeScript.
-  - `yarn lint`: lint files with [ESLint](https://eslint.org/).
-    - `yarn example start`: start the Metro server for the example app.
+- `yarn lint`: lint files with [ESLint](https://eslint.org/).
+- `yarn test`: run API behavior regression tests.
+- `yarn example start`: start the Metro server for the example app.
 - `yarn example android`: run the example app on Android.
 - `yarn example ios`: run the example app on iOS.
   

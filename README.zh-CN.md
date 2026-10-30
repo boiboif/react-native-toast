@@ -163,6 +163,7 @@ Toast.showSystem(message)
 yarn
 yarn typecheck
 yarn lint
+yarn test
 yarn prepare
 yarn docs:dev
 ```

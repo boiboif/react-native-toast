@@ -116,13 +116,18 @@ const hide = (): void => {
 
 const configure = (partial: ToastConfig): void => {
   if (partial.defaultOptions) {
+    const previousStyle = config.defaultOptions.style;
     config.defaultOptions = {
       ...config.defaultOptions,
       ...partial.defaultOptions,
     };
 
     if (Object.prototype.hasOwnProperty.call(partial.defaultOptions, 'style')) {
-      const style = partial.defaultOptions.style;
+      const style =
+        partial.defaultOptions.style == null
+          ? partial.defaultOptions.style
+          : mergeStyles(previousStyle, partial.defaultOptions.style);
+      config.defaultOptions.style = style;
       NativeReactNativeToast.setDefaultStyle(
         style == null,
         encodeColor(style?.backgroundColor),
@@ -137,10 +142,11 @@ const configure = (partial: ToastConfig): void => {
   }
 
   if (partial.presetStyles) {
-    config.presetStyles = {
-      ...config.presetStyles,
-      ...partial.presetStyles,
-    };
+    for (const preset of Object.keys(partial.presetStyles) as ToastPreset[]) {
+      const style = partial.presetStyles[preset];
+      config.presetStyles[preset] =
+        style == null ? style : mergeStyles(config.presetStyles[preset], style);
+    }
   }
 };
 

@@ -168,6 +168,7 @@ for API details, Expo integration, platform behavior, and troubleshooting.
 yarn
 yarn typecheck
 yarn lint
+yarn test
 yarn prepare
 yarn docs:dev
 ```
