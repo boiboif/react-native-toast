@@ -39,8 +39,14 @@ Cancels the current toast and clears a pending request that has not appeared.
 Toast.config(config: ToastConfig): void
 ```
 
-Merges global defaults and preset styles. Passing `defaultOptions.style` also
-synchronizes the native default style.
+Merges global defaults and preset styles. `defaultOptions.style` and each preset
+style merge by field, so a partial update preserves previously configured fields.
+Passing `defaultOptions.style` also synchronizes the full merged style to the
+native default style.
+
+Pass `defaultOptions: { style: undefined }` to clear the global custom style and
+reset the native default style. The advanced `Native.setDefaultStyle` API replaces
+the native default style directly.
 
 ### `Toast.showSystem`
 
@@ -145,4 +151,6 @@ Native.setGravityWithOffset(gravity, xOffset, yOffset)
 ```
 
 `setGravity` and `setGravityWithOffset` only have an effect on Android.
+The advanced `Native.setGravityWithOffset` API takes offsets in pixels;
+offsets in `ToastOptions` use dp.
 

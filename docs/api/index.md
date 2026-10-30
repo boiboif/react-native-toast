@@ -39,7 +39,9 @@ Toast.hide(): void
 Toast.config(config: ToastConfig): void
 ```
 
-合并全局默认参数和预设样式。传入 `defaultOptions.style` 时也会同步原生默认样式。
+合并全局默认参数和预设样式。`defaultOptions.style` 和各预设样式按字段合并，因此局部更新不会清除先前配置的其他样式字段。传入 `defaultOptions.style` 时也会将合并后的完整样式同步到原生默认样式。
+
+传入 `defaultOptions: { style: undefined }` 可清除全局自定义样式并重置原生默认样式。高级接口 `Native.setDefaultStyle` 直接替换原生默认样式。
 
 ### `Toast.showSystem`
 
@@ -142,5 +144,5 @@ Native.setGravity(gravity)
 Native.setGravityWithOffset(gravity, xOffset, yOffset)
 ```
 
-`setGravity` 和 `setGravityWithOffset` 只在 Android 有实际效果。
+`setGravity` 和 `setGravityWithOffset` 只在 Android 有实际效果。高级接口 `Native.setGravityWithOffset` 的偏移单位为像素；`ToastOptions` 中的偏移单位为 dp。
 

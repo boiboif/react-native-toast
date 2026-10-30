@@ -37,8 +37,8 @@ class ReactNativeToastModule(reactContext: ReactApplicationContext) :
     val message: String,
     val duration: Int? = null,
     val position: String? = null,
-    val xOffset: Int = 0,
-    val yOffset: Int = 0,
+    val xOffset: Float = 0f,
+    val yOffset: Float = 0f,
     val style: NativeToastStyle? = null,
   )
 
@@ -87,8 +87,8 @@ class ReactNativeToastModule(reactContext: ReactApplicationContext) :
           else -> null
         },
         position = position.ifEmpty { null },
-        xOffset = xOffset.toInt(),
-        yOffset = yOffset.toInt(),
+        xOffset = xOffset.toFloat(),
+        yOffset = yOffset.toFloat(),
         style = decodeStyle(
           backgroundColor,
           textColor,
@@ -266,7 +266,7 @@ class ReactNativeToastModule(reactContext: ReactApplicationContext) :
     toast.setView(createToastView(application, mergeStyles(defaultStyle, request.style), fallbackStyle))
 
     val gravity = resolveGravity(request.position)
-    val xOffset = if (request.position == null) defaultXOffset else request.xOffset
+    val xOffset = if (request.position == null) defaultXOffset else dp(application, request.xOffset)
     val yOffset = resolveYOffset(application, request.position, request.yOffset)
     toast.setGravity(gravity, xOffset, yOffset)
     toast.setMargin(0f, 0f)
@@ -344,11 +344,11 @@ class ReactNativeToastModule(reactContext: ReactApplicationContext) :
     else -> defaultGravity
   }
 
-  private fun resolveYOffset(application: Application, position: String?, yOffset: Int): Int =
+  private fun resolveYOffset(application: Application, position: String?, yOffset: Float): Int =
     when (position) {
-      "top" -> yOffset + if (yOffset == 0) dp(application, 16f) else 0
-      "bottom" -> yOffset + if (yOffset == 0) dp(application, 48f) else 0
-      "center" -> yOffset - getStatusBarHeight(application) / 2
+      "top" -> dp(application, if (yOffset == 0f) 16f else yOffset)
+      "bottom" -> dp(application, if (yOffset == 0f) 48f else yOffset)
+      "center" -> dp(application, yOffset) - getStatusBarHeight(application) / 2
       else -> defaultYOffset
     }
 
